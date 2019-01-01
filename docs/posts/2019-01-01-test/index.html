@@ -62,7 +62,7 @@
 <!--/radix_placeholder_rmarkdown_metadata-->
   
   <script type="text/json" id="radix-resource-manifest">
-  {"type":"character","attributes":{},"value":["test_files/bowser-1.9.3/bowser.min.js","test_files/crosstalk-1.0.0/css/crosstalk.css","test_files/crosstalk-1.0.0/js/crosstalk.js","test_files/crosstalk-1.0.0/js/crosstalk.js.map","test_files/crosstalk-1.0.0/js/crosstalk.min.js","test_files/crosstalk-1.0.0/js/crosstalk.min.js.map","test_files/datatables-binding-0.5/datatables.js","test_files/datatables-css-0.0.0/datatables-crosstalk.css","test_files/distill-2.2.21/template.v2.js","test_files/dt-core-1.10.16/css/jquery.dataTables.extra.css","test_files/dt-core-1.10.16/css/jquery.dataTables.min.css","test_files/dt-core-1.10.16/js/jquery.dataTables.min.js","test_files/figure-html5/unnamed-chunk-2-1.png","test_files/figure-html5/unnamed-chunk-3-1.png","test_files/figure-html5/unnamed-chunk-4-1.png","test_files/figure-html5/unnamed-chunk-5-1.png","test_files/figure-html5/unnamed-chunk-6-1.png","test_files/figure-html5/unnamed-chunk-7-1.png","test_files/htmlwidgets-1.3/htmlwidgets.js","test_files/jquery-1.11.3/jquery.min.js","test_files/jquery-1.12.4/jquery.min.js","test_files/jquery-1.12.4/LICENSE.txt","test_files/pagedtable-1.1/css/pagedtable.css","test_files/pagedtable-1.1/js/pagedtable.js","test_files/webcomponents-2.0.0/webcomponents.js"]}
+  {"type":"character","attributes":{},"value":["test_files/bowser-1.9.3/bowser.min.js","test_files/crosstalk-1.0.0/css/crosstalk.css","test_files/crosstalk-1.0.0/js/crosstalk.js","test_files/crosstalk-1.0.0/js/crosstalk.js.map","test_files/crosstalk-1.0.0/js/crosstalk.min.js","test_files/crosstalk-1.0.0/js/crosstalk.min.js.map","test_files/datatables-binding-0.5/datatables.js","test_files/datatables-css-0.0.0/datatables-crosstalk.css","test_files/distill-2.2.21/template.v2.js","test_files/dt-core-1.10.16/css/jquery.dataTables.extra.css","test_files/dt-core-1.10.16/css/jquery.dataTables.min.css","test_files/dt-core-1.10.16/js/jquery.dataTables.min.js","test_files/figure-html5/unnamed-chunk-16-1.png","test_files/figure-html5/unnamed-chunk-2-1.png","test_files/figure-html5/unnamed-chunk-3-1.png","test_files/figure-html5/unnamed-chunk-4-1.png","test_files/figure-html5/unnamed-chunk-5-1.png","test_files/figure-html5/unnamed-chunk-6-1.png","test_files/figure-html5/unnamed-chunk-7-1.png","test_files/htmlwidgets-1.3/htmlwidgets.js","test_files/jquery-1.11.3/jquery.min.js","test_files/jquery-1.12.4/jquery.min.js","test_files/jquery-1.12.4/LICENSE.txt","test_files/pagedtable-1.1/css/pagedtable.css","test_files/pagedtable-1.1/js/pagedtable.js","test_files/webcomponents-2.0.0/webcomponents.js"]}
   </script>
   <!--radix_placeholder_navigation_in_header-->
 
@@ -1346,6 +1346,7 @@ theme_minimal2 = theme_scatter +
 skyblue = &quot;#56B4E9&quot;</code></pre>
 </div>
 <p>データセットはこれまたおなじみの<code>diamond</code>を使います。 詳細は<code>?diamonds</code>を見て頂ければと思いますが、ダイヤの重さ(<code>carat</code>)や透明度(<code>clarity</code>)とその値段(<code>price</code>)などが入ったデータセットになります。 今回はこのデータセットを用いて、ダイヤの属性がダイヤの値段にどんな影響を与えるのかを探索することにします。</p>
+<h1>可視化によるデータ分析</h1>
 <p>まずはアウトカムである価格の分布を見てみましょう。</p>
 <div class="layout-chunk" data-layout="l-body">
 <pre class="r"><code>
@@ -1409,6 +1410,7 @@ df %&gt;%
 </div>
 <p>透明度が高い場合にはカラット数が小さくなる傾向が見て取れます。 僕はダイヤモンドに詳しくないのですが、大きくて透明なダイヤを作るのは難しいということのようです。(参考:<a href="https://www.bluenile.com/jp/education/diamonds/clarity" class="uri">https://www.bluenile.com/jp/education/diamonds/clarity</a>)</p>
 <p>つまり、ここでは「ダイヤのカラットと価格には正の相関がある一方で、カラットと透明度には負の相関があり、結果として透明度と価格に負の相関があるように見えてしまう」という典型的な交絡の問題が起きています。 この場合は、重回帰分析でカラットの影響を取り除くことで透明度と価格の正しい関係を見ることができます。 今回のように、単純に一つ一つの説明変数と非説明変数の関係を見ているだけでは間違った結論を下していまう可能性があるので注意が必要です。</p>
+<h1>モデリングによるデータ分析</h1>
 <p>ここまでの可視化で得られた仮説を回帰モデルで確かめてみましょう。</p>
 <p>回帰モデルを作る前に、カテゴリカル変数が<code>ordere=TRUE</code>になっていると<code>lm()</code>の挙動が面倒なので、<code>factor</code>型の変数は全て<code>ordered=FALSE</code>にしておきます。</p>
 <div class="layout-chunk" data-layout="l-body">
@@ -1417,6 +1419,7 @@ df_input = df %&gt;%
     mutate_if(is.ordered, factor, ordered = FALSE)</code></pre>
 </div>
 <p><code>mutate_if()</code>は複数の列に同じ処理を行う際にめちゃくちゃ便利な関数です。 第一引数で条件を指定して（<code>is.ordered</code>）、条件に当てはまった列にのみ第二引数の関数を適用します（<code>factor</code>）。関数のオプションは後ろにくっつけて指定すればOKです（<code>ordered = FALSE</code>）。</p>
+<h2>複数のモデルを当てはめる場合</h2>
 <p>今回は</p>
 <ol type="1">
 <li>価格を透明度のみで説明するモデル</li>
@@ -1504,6 +1507,40 @@ df_result %&gt;%
 </div>
 </div>
 <p>様々な指標がまとめて出力されますが、今回は自由度調整済み決定係数(<code>adj.r.squared</code>)を見ることにしましょう。 透明度のみモデル（モデル1）と比べると、カラットを加えることでモデルの説明力は大幅に上昇しています（モデル2）。 カラットに対数をとるとさらに説明力が改善されており（モデル3）、3つのモデルの中ではモデル3がベストであると言えそうです。</p>
+<h2>データをサブサンプルに分けて分析する場合</h2>
+<div class="layout-chunk" data-layout="l-body">
+<pre class="r"><code>
+df_result2 = df %&gt;% 
+    nest(-cut) %&gt;% 
+    mutate(model = map(data, ~lm(log(price) ~ log(carat), data = .)),
+           tidied = map(model, tidy))</code></pre>
+</div>
+<div class="layout-chunk" data-layout="l-body">
+<pre class="r"><code>
+df_result2 %&gt;% 
+    select(cut, tidied) %&gt;% 
+    unnest() %&gt;% 
+    filter(term != &quot;(Intercept)&quot;)</code></pre>
+<pre><code>
+# A tibble: 5 x 6
+  cut       term       estimate std.error statistic p.value
+  &lt;ord&gt;     &lt;chr&gt;         &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;   &lt;dbl&gt;
+1 Ideal     log(carat)     1.71   0.00310     550.        0
+2 Premium   log(carat)     1.66   0.00355     467.        0
+3 Good      log(carat)     1.74   0.00635     274.        0
+4 Very Good log(carat)     1.73   0.00382     452.        0
+5 Fair      log(carat)     1.49   0.0171       87.2       0</code></pre>
+</div>
+<div class="layout-chunk" data-layout="l-body">
+<pre class="r"><code>
+df %&gt;% 
+    sample_frac(0.1) %&gt;% #データが多いので減らす
+    ggplot(aes(log(carat), log(price))) +
+    geom_point(color = skyblue, alpha = 0.5) +
+    facet_wrap(~cut) + 
+    theme_scatter</code></pre>
+<p><img src="test_files/figure-html5/unnamed-chunk-16-1.png" width="1768" /></p>
+</div>
 <!--radix_placeholder_article_footer-->
 <!--/radix_placeholder_article_footer-->
 </div>
