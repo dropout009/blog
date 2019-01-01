@@ -16,19 +16,19 @@
   },
   {
     "path": "posts/2019-01-01-test/",
-    "title": "Test",
-    "description": "A short description of the post.",
+    "title": "purrrとbroomで複数の回帰モデルを効率的に扱う",
+    "description": {},
     "author": [
       {
-        "name": "Nora Jones",
-        "url": "https://example.com/norajones"
+        "name": "morishita",
+        "url": {}
       }
     ],
     "date": "2019-01-01",
     "categories": [],
     "preview": "posts/2019-01-01-test/test_files/figure-html5/unnamed-chunk-3-1.png",
-    "last_modified": "2019-01-01T23:19:58+09:00",
-    "preview_width": 1248,
-    "preview_height": 768
+    "last_modified": "2019-01-02T00:08:28+09:00",
+    "preview_width": 3536,
+    "preview_height": 2176
   }
 ]
