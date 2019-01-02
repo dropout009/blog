@@ -1341,7 +1341,7 @@ df = diamonds #面倒なので名前をdfに
 
 df %&gt;% 
     ggplot(aes(price)) +
-    geom_histogram(fill = &quot;#56B4E9&quot;) +
+    geom_histogram(fill = &quot;#56B4E9&quot;, color = &quot;white&quot;) +
     theme_minimal2</code></pre>
 <p><img src="test_files/figure-html5/unnamed-chunk-2-1.png" width="1768" /></p>
 </div>
@@ -1350,7 +1350,7 @@ df %&gt;%
 <pre class="r"><code>
 df %&gt;% 
     ggplot(aes(log(price))) +
-    geom_histogram(fill = &quot;#56B4E9&quot;) +
+    geom_histogram(fill = &quot;#56B4E9&quot;, color = &quot;white&quot;) +
     theme_minimal2</code></pre>
 <p><img src="test_files/figure-html5/unnamed-chunk-3-1.png" width="1768" /></p>
 </div>
