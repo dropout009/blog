@@ -4,18 +4,17 @@
     <title>Dropout</title>
     <link>https://morishita0619.github.io/blog/</link>
     <atom:link href="https://morishita0619.github.io/blog/index.xml" rel="self" type="application/rss+xml"/>
-    <description>My Blog
+    <description>ひたすらデータ分析をしていきます
 </description>
     <generator>Radix</generator>
-    <lastBuildDate>火, 01  1 2019 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>水, 02  1 2019 00:00:00 +0000</lastBuildDate>
     <item>
       <title>Welcome to My Blog</title>
-      <dc:creator>Nora Jones</dc:creator>
       <link>https://morishita0619.github.io/blog/posts/welcome</link>
       <description>Welcome to our new blog, My Blog. We hope you enjoy 
 reading what we have to say!</description>
       <guid>https://morishita0619.github.io/blog/posts/welcome</guid>
-      <pubDate>火, 01  1 2019 00:00:00 +0000</pubDate>
+      <pubDate>水, 02  1 2019 00:00:00 +0000</pubDate>
     </item>
     <item>
       <title>purrrとbroomで複数の回帰モデルを効率的に管理する</title>
