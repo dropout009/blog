@@ -1334,7 +1334,7 @@ theme_minimal2 = theme_scatter +
 </div>
 <p>データセットはこれまたおなじみの<code>diamond</code>を使います。 詳細は<code>?diamonds</code>を見て頂ければと思いますが、ダイヤの重さ(<code>carat</code>)や透明度(<code>clarity</code>)とその値段(<code>price</code>)などが入ったデータセットになります。 今回はこのデータセットを用いて、ダイヤの属性がダイヤの値段にどんな影響を与えるのかを探索することにします。</p>
 <h1>可視化によるデータ分析</h1>
-<p>まずはアウトカムである価格の分布を見てみましょう。</p>
+<p>まずは非説明変数である価格の分布を見てみましょう。</p>
 <div class="layout-chunk" data-layout="l-body">
 <pre class="r"><code>
 df = diamonds #面倒なので名前をdfに
@@ -1345,7 +1345,7 @@ df %&gt;%
     theme_minimal2</code></pre>
 <p><img src="test_files/figure-html5/unnamed-chunk-2-1.png" width="1768" /></p>
 </div>
-<p>ものすごく歪んだ分布をしていますね。 歪んだ分布への簡便な対応策として、今回は対数を取ることにします。</p>
+<p>ものすごく歪んだ分布をしています。 歪んだ分布への簡便な対応策として、今回は対数を取ることにします。</p>
 <div class="layout-chunk" data-layout="l-body">
 <pre class="r"><code>
 df %&gt;% 
@@ -1396,7 +1396,7 @@ df %&gt;%
 <p><img src="test_files/figure-html5/unnamed-chunk-7-1.png" width="1768" /></p>
 </div>
 <p>透明度が高い場合にはカラット数が小さくなる傾向が見て取れます。 僕はダイヤモンドに詳しくないのですが、大きくて透明なダイヤを作るのは難しいということのようです。(参考:<a href="https://www.bluenile.com/jp/education/diamonds/clarity" class="uri">https://www.bluenile.com/jp/education/diamonds/clarity</a>)</p>
-<p>つまり、ここでは「ダイヤのカラット数と価格には正の相関がある一方で、カラット数と透明度には負の相関があり、結果として透明度と価格に負の相関があるように見えてしまう」という典型的な交絡の問題が起きています。 この場合は、重回帰分析でカラット数の影響を取り除くことで透明度と価格の正しい関係を見ることができます。 今回のように、単純に一つ一つの説明変数と非説明変数の関係を見ているだけでは間違った結論を下していまう可能性があるので注意が必要です。</p>
+<p>つまり、ここでは「ダイヤのカラット数と価格には正の相関がある一方で、カラット数と透明度には負の相関があり、結果として透明度と価格に負の相関があるように見えてしまう」という典型的な交絡の問題が起きています。 この場合は、重回帰分析でカラット数の影響を取り除くことで透明度と価格の正しい関係を見ることができます。 今回のように、単純に一つ一つの説明変数と被説明変数の関係を見ているだけでは間違った結論を下していまう可能性があるので注意が必要です。</p>
 <h1>モデリングによるデータ分析</h1>
 <p>ここまでの可視化で得られた仮説を回帰モデルで確かめてみましょう。</p>
 <p>回帰モデルを作る前に、カテゴリカル変数が<code>ordere=TRUE</code>になっていると<code>lm()</code>の挙動が面倒なので、<code>factor</code>型の変数は全て<code>ordered=FALSE</code>にしておきます。</p>
@@ -1405,7 +1405,7 @@ df %&gt;%
 df_input = df %&gt;% 
     mutate_if(is.ordered, factor, ordered = FALSE)</code></pre>
 </div>
-<p><code>mutate_if()</code>は複数の列に同じ処理を行う際にめちゃくちゃ便利な関数です。 第一引数で条件を指定して（<code>is.ordered</code>）、条件に当てはまった列にのみ第二引数の関数を適用します（<code>factor</code>）。関数のオプションは後ろにくっつけて指定すればOKです（<code>ordered = FALSE</code>）。</p>
+<p><code>mutate_if()</code>は複数の列に同じ処理を行う際に便利な関数です。 第一引数で条件を指定して（<code>is.ordered</code>）、条件に当てはまった列にのみ第二引数の関数を適用します（<code>factor</code>）。関数のオプションは後ろにくっつけて指定すればOKです（<code>ordered = FALSE</code>）。</p>
 <h2>複数のモデルを当てはめる場合</h2>
 <p>今回は</p>
 <ol type="1">
@@ -1445,7 +1445,7 @@ paged_table(df_result)</code></pre>
   </script>
 </div>
 </div>
-<p>(1)では<code>map()</code>を用いて「<code>formula</code>列の一つ一つの値を引数として<code>lm()</code>を実行する」ということをやっています。<code>lm()</code>はデータも指定する必要がありますが、<code>map()</code>も<code>mutate_if()</code>同様後ろにくっつけて指定できます。 さらに、(2), (3)では推定されたモデルに対して、それぞれ<code>tidy()</code>と<code>glance</code>を適用しています。</p>
+<p>(1)では<code>map()</code>を用いて「<code>formula</code>列の一つ一つの値を引数として<code>lm()</code>を実行する」ということをやっています。<code>lm()</code>はデータも指定する必要がありますが、<code>map()</code>も<code>mutate_if()</code>同様後ろにくっつけて指定できます。 さらに、(2), (3)では推定されたモデルに対して、それぞれ<code>tidy()</code>と<code>glance()</code>を適用しています。</p>
 <p>分析結果をデータフレームとして持つことで、どのモデルがどの結果に対応するかを間違うことなく効率的に管理することができます。</p>
 <p><code>tidy()</code>は回帰モデルの係数をtidyなデータフレームとして持ってきてくれる関数です。データフレームの中のデータフレームを取り出すために<code>unnest()</code>を使います。</p>
 <div class="layout-chunk" data-layout="l-body">
