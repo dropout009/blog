@@ -18,10 +18,9 @@ reading what we have to say!</description>
       <pubDate>火, 01  1 2019 00:00:00 +0000</pubDate>
     </item>
     <item>
-      <title>探索的データ分析で複数の回帰モデルを効率的に扱う</title>
-      <dc:creator>morishita</dc:creator>
+      <title>purrrとbroomで複数の回帰モデルを効率的に比較する</title>
       <link>https://morishita0619.github.io/blog/posts/2019-01-01-test</link>
-      <description>探索的データ分析で複数の回帰モデルを効率的に扱う</description>
+      <description>purrrとbroomで複数の回帰モデルを効率的に比較する</description>
       <guid>https://morishita0619.github.io/blog/posts/2019-01-01-test</guid>
       <pubDate>月, 31 12 2018 00:00:00 +0000</pubDate>
       <media:content url="https://morishita0619.github.io/blog/posts/2019-01-01-test/test_files/figure-html5/unnamed-chunk-2-1.png" medium="image" type="image/png" width="3536" height="2176"/>
